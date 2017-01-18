@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"    
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p"    
+    xmlns:context="http://www.springframework.org/schema/context"    
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:aop="http://www.springframework.org/schema/aop"    
+    xsi:schemaLocation="     
+           http://www.springframework.org/schema/beans     
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd     
+           http://www.springframework.org/schema/context     
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd    
+           http://www.springframework.org/schema/mvc     
+           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+		
+		  <!-- 添加注解驱动 -->  
+    	  <mvc:annotation-driven />
+    	 
+ 		  <!-- 注解扫描 -->
+    	  <context:annotation-config />
+    	  <!-- spring——validator 表单验证扫描 -->
+    	  <mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+    	  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+		        <!--不设置则默认为classpath下的 ValidationMessages.properties -->
+		        <property name="validationMessageSource" ref="validatemessageSource"/>
+		  </bean>
+	      <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+	      <bean id="validatemessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+	        	<property name="basename" value="classpath*:validatemessages"/>  
+	        	<property name="fileEncodings" value="utf-8"/>  
+	        	<property name="cacheSeconds" value="120"/>  
+	      </bean>
+    	  
+    	  
+    	  <!-- 启动扫描所有的controller 只扫描mvc，不扫描service -->
+	      <context:component-scan base-package="org.heyimateyang.controller">
+	        	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	      </context:component-scan> 
+    	  
+    	  <!--   允许对静态资源文件的访问   -->
+		  <mvc:default-servlet-handler /> 
+		  <!--  <mvc:resources location="/images/" mapping="/images/**"/>   
+		  <mvc:resources location="/js/" mapping="/js/**"/>    
+		  <mvc:resources location="/css/" mapping="/css/**"/>  --> 
+    	  <mvc:resources mapping="/css/**" location="/css/" />  
+    	  <mvc:resources mapping="/img/**" location="/img/" />  
+    	  <mvc:resources mapping="/js/**" location="/js/" />
+    	  <mvc:resources mapping="/assets/**" location="/assets/" />
+    	  <mvc:resources mapping="/Editor/**" location="/Editor/" />
+    	  <mvc:resources mapping="/404/**" location="/404/" />
+    	   
+    	  <!-- 当上面要访问的静态资源不包括在上面的配置中时，则根据此配置来访问 -->
+          <mvc:default-servlet-handler/>
+          
+          
+          <!-- 定义跳转的文件的前后缀 -->  
+	      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+		        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
+		        <property name="prefix" value="/WEB-INF/" />
+		        <property name="suffix" value=".jsp" />   
+	      </bean>
+    
+	      <!-- 上传文件大小限制为2M，2*1024*1024 -->
+	      <bean id="maxUploadSize" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+		        <property name="maxUploadSize" value="4194304" />                                       
+		        <property name="maxInMemorySize" value="4096" />  
+	      </bean> 
+	      
+	      <!-- 拦截页面重复提交配置 -->
+		  <mvc:interceptors>
+		        <!-- 配置Token拦截器，防止用户重复提交数据 -->
+		        <mvc:interceptor>
+		        	<!--拦截得路径 拦截所有的URL-->
+		            <mvc:mapping path="/**"/>
+		            <!--class文件路径改成你自己写得拦截器路径！！ -->
+		            <bean class="org.heyimateyang.interceptor.TokenInterceptor"/>
+		        </mvc:interceptor>
+		  </mvc:interceptors>
+    	
+    	 <mvc:interceptors>  
+		    <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 --> 
+		    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />  
+		    <!-- 如果不定义 mvc:mapping path 将拦截所有的URL请求 -->
+		    <bean class="org.heyimateyang.interceptor.AuthInterceptor"></bean>
+		</mvc:interceptors> 
+		
+		
+  
+</beans>  
