@@ -124,7 +124,7 @@ public class AdminLoginContorller {
 					return "AdminLogin";
 				}else{
 					//存入管理员信息session	
-					session.setAttribute("adminMessage", AdminLogin);				
+					session.setAttribute("adminMessage", AdminLogin);	
 					return "redirect:/Login_Ok";
 				}					
 			}

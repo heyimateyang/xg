@@ -12,7 +12,17 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	
-	 
+	 	<!-- CSS -->
+        <link href="Admin/css/bootstrap.min.css" rel="stylesheet">
+        <link href="Admin/css/animate.min.css" rel="stylesheet">
+        <link href="Admin/css/font-awesome.min.css" rel="stylesheet">
+        <link href="Admin/css/form.css" rel="stylesheet">
+        <link href="Admin/css/calendar.css" rel="stylesheet">
+        <link href="Admin/css/style.css" rel="stylesheet">
+        <link href="Admin/css/icons.css" rel="stylesheet">
+        <link href="Admin/css/lightbox.css" rel="stylesheet">
+        <link href="Admin/css/media-player.css" rel="stylesheet">
+        <link href="Admin/css/generics.css" rel="stylesheet"> 
 	 
 
   </head>
@@ -29,8 +39,8 @@
                             <img class="profile-pic animated" src="Admin/img/profile-pic.jpg" alt="">
                         </a>
                         <ul class="dropdown-menu profile-menu">
-                            <li><a href="">我的资料</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
-                            <li><a href="">发布公告</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+                            <li><a href="updateAdminMessage">我的资料</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
+                            <li><a href="sendNotice">发布公告</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
                             <li><a href="">系统设置</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
                             <li><a href="RemoveAdmin">退出登录</a> <i class="icon left">&#61903;</i><i class="icon right">&#61815;</i></li>
                         </ul>
@@ -62,44 +72,38 @@
                         
                         <div class="s-widget-body">
                             <div class="side-border">
-                                <small>Joomla Website</small>
-                                <div class="progress progress-small">
-                                     <a href="#" data-toggle="tooltip" title="" class="progress-bar tooltips progress-bar-danger" style="width: 60%;" data-original-title="60%">
-                                          <span class="sr-only">60% Complete</span>
-                                     </a>
-                                </div>
+                                <small>登录帐号:</small>
+                                
+                                ${adminMessage.admin_user }
                             </div>
+                            <br/>
                             <div class="side-border">
-                                <small>Opencart E-Commerce Website</small>
-                                <div class="progress progress-small">
-                                     <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-info" style="width: 43%;" data-original-title="43%">
-                                          <span class="sr-only">43% Complete</span>
-                                     </a>
-                                </div>
+                                <small>管理员名字:</small>
+                                ${adminMessage.adminMessage.admin_name}
                             </div>
+                            <br/>
                             <div class="side-border">
-                                <small>Social Media API</small>
-                                <div class="progress progress-small">
-                                     <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-warning" style="width: 81%;" data-original-title="81%">
-                                          <span class="sr-only">81% Complete</span>
-                                     </a>
-                                </div>
+                                <small>QQ:</small>
+                                ${adminMessage.adminMessage.admin_qq}
                             </div>
+                            <br/>
                             <div class="side-border">
-                                <small>VB.Net Software Package</small>
-                                <div class="progress progress-small">
-                                     <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-success" style="width: 10%;" data-original-title="10%">
-                                          <span class="sr-only">10% Complete</span>
-                                     </a>
-                                </div>
+                                <small>微信:</small>
+                                ${adminMessage.adminMessage.admin_wechat}
                             </div>
+                            <br/>
                             <div class="side-border">
-                                <small>Chrome Extension</small>
-                                <div class="progress progress-small">
-                                     <a href="#" data-toggle="tooltip" title="" class="tooltips progress-bar progress-bar-success" style="width: 95%;" data-original-title="95%">
-                                          <span class="sr-only">95% Complete</span>
-                                     </a>
-                                </div>
+                                <small>头像:</small>
+                                <div class="block-area">
+	                                <a href="adminImage/${adminMessage.adminMessage.admin_portrait}" data-rel="gallery"  class="pirobox_gall img-popup" title="我的头像">
+				                        <img src="adminImage/${adminMessage.adminMessage.admin_portrait}" alt="" width="150">  
+				                    </a>
+			                    </div>
+                            </div>
+                            <br/>
+                            <div class="side-border">
+                                <small>注册日期:</small>
+                                ${adminMessage.adminMessage.create_date}
                             </div>
                         </div>
                     </div>
@@ -107,10 +111,14 @@
                 
                 <!-- Side Menu -->
                 <ul class="list-unstyled side-menu">
-                    <li class="active">
-                        <a class="sa-side-home" href="Login_Ok">
-                            <span class="menu-item">首页</span>
+                    <li class="dropdown">
+                        <a class="sa-side-form" href="">
+                            <span class="menu-item">主页</span>
                         </a>
+                        <ul class="list-unstyled menu-item">
+                            <li><a href="AdminLoginIndex">首页</a></li>
+                            
+                        </ul>
                     </li>
                     <li>
                         <a class="sa-side-typography" href="typography.html">
@@ -202,10 +210,6 @@
         <script src="Admin/js/easypiechart.js"></script> <!-- EasyPieChart - Animated Pie Charts -->
         <script src="Admin/js/charts.js"></script> <!-- All the above chart related functions -->
 
-        <!-- Map -->
-        <script src="Admin/js/maps/jvectormap.min.js"></script> <!-- jVectorMap main library -->
-        <script src="Admin/js/maps/usa.js"></script> <!-- USA Map for jVectorMap -->
-
         <!--  Form Related -->
         <script src="Admin/js/icheck.js"></script> <!-- Custom Checkbox + Radio -->
 
@@ -216,6 +220,10 @@
         <script src="Admin/js/calendar.min.js"></script> <!-- Calendar -->
         <script src="Admin/js/feeds.min.js"></script> <!-- News Feeds -->
         
+        
+        <!-- Media -->
+        <script src="Admin/js/media-player.min.js"></script> <!-- Video Player -->
+        <script src="Admin/js/pirobox.min.js"></script> <!-- Lightbox -->
 
         <!-- All JS functions -->
         <script src="Admin/js/functions.js"></script>

@@ -33,8 +33,9 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			if(authPassport == null || authPassport.validate() == false){
 				return true;
 			}else{
-				//根据session 值进行判断,没登录返回登录页面
+				//根据session 值进行判断,没登录返回首页
 				if(object == null){
+					
 					response.sendRedirect(request.getContextPath() + "/index.do");
 					return false;
 				}

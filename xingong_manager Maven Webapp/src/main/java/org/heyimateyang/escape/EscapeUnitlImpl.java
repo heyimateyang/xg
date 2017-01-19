@@ -38,24 +38,5 @@ public class EscapeUnitlImpl implements EscapeUnitl{
 		list.add(loginPassword);
 		return list;
 	}
-	
-	/*@Test
-	public void String_unitl(){
-		String a = "3232sd";
-		String b = "123"; 
-		EscapeUnitl escapeUnitl = new EscapeUnitlImpl();
-		List<String> arr = escapeUnitl.escapeUnitl(a, b);
-		//System.out.println(arr);
-		String loginName = arr.get(0);
-		System.out.println(loginName);
-		String loginPassword = null;
-		for (int i = 1; i < arr.size(); i++) {
-			
-			
-		}
-	}*/
-	
-	
-	
 
 }

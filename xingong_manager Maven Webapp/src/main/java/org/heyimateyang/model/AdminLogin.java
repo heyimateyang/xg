@@ -94,8 +94,8 @@ public class AdminLogin implements Serializable{
 		this.admin_password = admin_password;
 	}
 	
-	//懒加载
-	@ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)    //多对一关系共享主键映射,对权限表
+	//急加载
+	@ManyToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)    //多对一关系共享主键映射,对权限表
 	@JoinColumn(name = "jurisdiction_Id") 
 	public Jurisdiction getJurisdiction() {
 		return jurisdiction;

@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             alert("修改成功");
                             
 							$("#system_email").val(data.system_email);
-							$("#system_emailPwd").val(data.system_emailPwd);
+							/* $("#system_emailPwd").val(data.system_emailPwd); */
 							$("#email_server").val(data.email_server); 
                    }
 
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<jsp:include page="page/Adminmessage.jsp"/>
             	<!-- Breadcrumb -->
                 <ol class="breadcrumb hidden-xs">
-                    <li>首页</li>
+                    <li><a href="AdminLoginIndex">首页</a></li>
                     <li><a href="#">Library</a></li>
                     <li><a href="#">Data</a></li>
                 </ol>
@@ -144,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <strong>开发语言</strong><br>
                         <a href="#">
                         	使用java springMVC开发
-                        	spring-security提高系统安全度
+                        	spring-security提高系统安全
                         </a>
                     </address>
                 </article>

@@ -41,6 +41,7 @@ public class Jurisdiction implements Serializable{
 	private int delete_assistantjurisdiction;	          //删除辅导员助理权限
 	private int add_studentjurisdiction;	             //添加学生权限
 	private int delete_studentjurisdiction;             //删除学生权限
+	private int add_systemmessage;                      //添加系统公告权限
 	private int delete_systemmessage;                  //删除系统公告权限
 	private int delete_post;				          //删除帖子权限
 	private Set<StudentLogin> studentLogins;         //一对多映射关系   对应学生登录信息表
@@ -115,6 +116,15 @@ public class Jurisdiction implements Serializable{
 	public void setDelete_adminjurisdiction(int delete_adminjurisdiction) {
 		this.delete_adminjurisdiction = delete_adminjurisdiction;
 	}
+	
+	@Column(nullable = false)
+	public int getAdd_systemmessage() {
+		return add_systemmessage;
+	}
+	public void setAdd_systemmessage(int add_systemmessage) {
+		this.add_systemmessage = add_systemmessage;
+	}
+	
 	
 	@Column(nullable = false)
 	public int getAdd_instructorjurisdiction() {

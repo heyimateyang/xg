@@ -83,6 +83,7 @@
 		    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />  
 		    <!-- 如果不定义 mvc:mapping path 将拦截所有的URL请求 -->
 		    <bean class="org.heyimateyang.interceptor.AuthInterceptor"></bean>
+		    <bean class="org.heyimateyang.interceptor.Jurisdictioninterceptor"></bean>
 		</mvc:interceptors> 
 		
 		
